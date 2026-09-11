@@ -1,0 +1,12 @@
+Flask
+python-dotenv
+supabase
+pypdf
+python-docx
+reportlab
+requests
+beautifulsoup4
+scikit-learn
+numpy
+Werkzeug
+xai-sdk

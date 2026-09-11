@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="HireSense AI Resume Analysis Results">
+
+    <link rel="icon"
+          type="image/x-icon"
+          href="{{ url_for('static', filename='v3-favicon.ico') }}">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="{{ url_for('static', filename='v3-favicon-32.png') }}">
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="{{ url_for('static', filename='v3-favicon-180.png') }}">
+
+    <title>HireSense | Analysis Results</title>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(210, 240, 228, 0.75),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 30%,
+                    rgba(220, 242, 235, 0.65),
+                    transparent 32%
+                ),
+                #f4f8f6;
+
+            color: #203752;
+            font-family: "Inter", Arial, sans-serif;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .result-page {
+            width: 100%;
+            max-width: 1550px;
+            margin: 0 auto;
+            padding: 35px 45px 70px;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .result-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+
+        /* =====================================================
+           HIRESENSE SAMPLE-STYLE LOGO
+        ====================================================== */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .hiresense-logo {
+            width: 54px;
+            height: 54px;
+            flex: 0 0 54px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+            border-radius: 16px;
+
+            background: #11765A;
+
+            box-shadow:
+                0 9px 24px
+                rgba(31, 122, 92, 0.22);
+        }
+
+        .hiresense-logo svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+
+        /* =====================================================
+           BRAND TEXT
+        ====================================================== */
+
+        .brand-text {
+            min-width: 0;
+        }
+
+        .brand-text strong {
+            display: block;
+
+            color: #203752;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 25px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .brand-text span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #71807c;
+
+            font-size: 11px;
+            letter-spacing: 0.4px;
+        }
+
+
+        /* =====================================================
+           NEW ANALYSIS BUTTON
+        ====================================================== */
+
+        .new-analysis-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 13px 19px;
+
+            border-radius: 12px;
+
+            background: #1f7a5c;
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .new-analysis-btn:hover {
+            background: #176549;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 24px
+                rgba(31, 122, 92, 0.22);
+        }
+
+        .new-analysis-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .result-hero {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 40px;
+
+            margin-bottom: 42px;
+        }
+
+        .result-hero-text {
+            max-width: 800px;
+            min-width: 0;
+        }
+
+        .eyebrow,
+        .section-label {
+            display: inline-block;
+
+            color: #14785a;
+
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+        }
+
+        .result-hero h1 {
+            margin: 11px 0 16px;
+
+            color: #203752;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: clamp(42px, 5vw, 67px);
+
+            line-height: 1.03;
+            letter-spacing: -1.8px;
+        }
+
+        .result-hero p {
+            max-width: 720px;
+            margin: 0;
+
+            color: #647875;
+
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+
+        /* =====================================================
+           ANALYSIS STATUS
+        ====================================================== */
+
+        .analysis-status {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            min-width: 250px;
+
+            padding: 16px 19px;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            border: 1px solid #dce9e3;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(25, 55, 70, 0.06);
+        }
+
+        .status-icon {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e3f4ed;
+            color: #1f7a5c;
+        }
+
+        .status-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .analysis-status strong {
+            display: block;
+
+            color: #203752;
+            font-size: 13px;
+        }
+
+        .analysis-status span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #7c8986;
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           THREE COLUMN LAYOUT
+        ====================================================== */
+
+        .result-grid {
+            display: grid;
+
+            grid-template-columns:
+                250px
+                minmax(500px, 1fr)
+                285px;
+
+            gap: 25px;
+
+            align-items: start;
+        }
+
+        .result-sidebar,
+        .result-main,
+        .result-right {
+            min-width: 0;
+        }
+
+
+        /* =====================================================
+           CARDS
+        ====================================================== */
+
+        .result-card {
+            width: 100%;
+
+            margin-bottom: 22px;
+            padding: 25px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border:
+                1px solid
+                rgba(31, 122, 92, 0.11);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 18px 50px
+                rgba(25, 55, 70, 0.07),
+                0 3px 12px
+                rgba(25, 55, 70, 0.035);
+        }
+
+        .result-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-card h2 {
+            margin: 8px 0 8px;
+
+            color: #203752;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 22px;
+            line-height: 1.2;
+        }
+
+        .result-card h3 {
+            margin: 10px 0 8px;
+
+            color: #203752;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 18px;
+        }
+
+        .result-card p {
+            margin: 0;
+
+            color: #6c7b78;
+
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           ICON BOX
+        ====================================================== */
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #e7f5ef;
+            color: #1f7a5c;
+        }
+
+        .card-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ====================================================== */
+
+        .profile-icon {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 15px;
+
+            border-radius: 15px;
+
+            background: #e6f4ee;
+            color: #1f7a5c;
+        }
+
+        .profile-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .profile-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #edf1ef;
+
+            font-size: 11px;
+        }
+
+        .profile-line:last-child {
+            border-bottom: none;
+        }
+
+        .profile-line span {
+            color: #7d8b88;
+        }
+
+        .profile-line strong {
+            color: #203752;
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           SCORE CARD
+        ====================================================== */
+
+        .score-card {
+            padding: 31px;
+        }
+
+        .score-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .score-status {
+            flex-shrink: 0;
+
+            padding: 8px 13px;
+
+            border-radius: 30px;
+
+            background: #e7f5ef;
+            color: #1f7a5c;
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .score-display {
+            display: flex;
+            align-items: center;
+
+            gap: 48px;
+
+            margin-top: 30px;
+        }
+
+
+        /* =====================================================
+           SCORE CIRCLE
+        ====================================================== */
+
+        .big-score-ring {
+            position: relative;
+
+            width: 220px;
+            height: 220px;
+
+            flex: 0 0 220px;
+        }
+
+        .big-score-ring svg {
+            width: 100%;
+            height: 100%;
+
+            transform: rotate(-90deg);
+        }
+
+        .score-track {
+            fill: none;
+
+            stroke: #e5ece9;
+
+            stroke-width: 13;
+        }
+
+        .score-progress {
+            fill: none;
+
+            stroke: #1f7a5c;
+
+            stroke-width: 13;
+
+            stroke-linecap: round;
+
+            transition:
+                stroke-dashoffset 1.2s ease;
+        }
+
+        .score-number {
+            position: absolute;
+            inset: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-number strong {
+            color: #203752;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 47px;
+
+            line-height: 1;
+        }
+
+        .score-number span {
+            margin-top: 7px;
+
+            color: #7a8885;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           SCORE EXPLANATION
+        ====================================================== */
+
+        .score-explanation {
+            max-width: 390px;
+            min-width: 0;
+        }
+
+        .score-explanation h3 {
+            margin: 0 0 9px;
+
+            color: #203752;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 27px;
+
+            line-height: 1.2;
+        }
+
+        .score-message {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            margin-top: 20px;
+            padding: 13px 15px;
+
+            border-radius: 12px;
+
+            background: #f0f8f5;
+            color: #1f7a5c;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            line-height: 1.4;
+        }
+
+        .score-message svg {
+            width: 17px;
+            height: 17px;
+
+            flex: 0 0 17px;
+        }
+
+        .score-message.warning {
+            background: #fff4e9;
+            color: #a66b1d;
+        }
+
+        .score-message.success {
+            background: #e5f6ed;
+            color: #1f7a5c;
+        }
+
+
+        /* =====================================================
+           SECTION HEADING
+        ====================================================== */
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 0;
+        }
+
+
+        /* =====================================================
+           SKILLS
+        ====================================================== */
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 9px;
+        }
+
+        .skill-pill {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 8px 12px;
+
+            border-radius: 30px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            line-height: 1.2;
+        }
+
+        .skill-pill svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .skill-pill.matched {
+            background: #e4f5ed;
+            color: #1f7a5c;
+        }
+
+        .skill-pill.missing {
+            background: #fff0ed;
+            color: #b45442;
+        }
+
+        .skill-pill.required {
+            background: #edf2f5;
+            color: #4e6270;
+        }
+
+
+        /* =====================================================
+           AI CONTENT
+        ====================================================== */
+
+        .ai-content {
+            width: 100%;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding: 14px;
+
+            margin-bottom: 10px;
+
+            border: 1px solid #edf3f0;
+
+            border-radius: 13px;
+
+            background: #f8fbfa;
+        }
+
+        .recommendation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .recommendation-icon {
+            width: 30px;
+            height: 30px;
+
+            flex: 0 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #e3f3ec;
+            color: #1f7a5c;
+        }
+
+        .recommendation-icon svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .recommendation-item strong {
+            color: #304657;
+
+            font-size: 11px;
+
+            line-height: 1.55;
+        }
+
+
+        /* =====================================================
+           RESOURCES
+        ====================================================== */
+
+        .resource-list {
+            width: 100%;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 13px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #edf1ef;
+        }
+
+        .resource-item:first-child {
+            padding-top: 0;
+        }
+
+        .resource-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .resource-number {
+            width: 30px;
+            height: 30px;
+
+            flex: 0 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e5f3ed;
+            color: #1f7a5c;
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .resource-content {
+            min-width: 0;
+        }
+
+        .resource-content strong {
+            color: #304657;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+        }
+
+        .resource-content p {
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           JOBS
+        ====================================================== */
+
+        .jobs-card {
+            position: sticky;
+            top: 20px;
+        }
+
+        .job-list {
+            margin-top: 17px;
+        }
+
+        .job-item {
+            padding: 15px 0;
+
+            border-bottom: 1px solid #edf1ef;
+        }
+
+        .job-item:first-child {
+            padding-top: 0;
+        }
+
+        .job-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .job-item > strong {
+            display: block;
+
+            color: #203752;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+        }
+
+        .job-item > span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #7c8986;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           JOB BUTTONS
+        ====================================================== */
+
+        .job-buttons {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .job-buttons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            padding: 8px 10px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .job-buttons a:hover {
+            transform: translateY(-2px);
+        }
+
+        .company-logo {
+            width: 15px;
+            height: 15px;
+
+            object-fit: contain;
+        }
+
+        .linkedin-btn {
+            background: #e8f1ff;
+            color: #0A66C2;
+        }
+
+        .linkedin-btn:hover {
+            background: #d8e8ff;
+        }
+
+        .indeed-btn {
+            background: #e8f7f3;
+            color: #2164F3;
+        }
+
+        .indeed-btn:hover {
+            background: #d9f1eb;
+        }
+
+
+        /* =====================================================
+           PDF
+        ====================================================== */
+
+        .pdf-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    #f0faf5,
+                    #ffffff
+                );
+        }
+
+        .pdf-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 15px;
+
+            border-radius: 14px;
+        }
+
+        .pdf-icon.success {
+            background: #dff3e9;
+            color: #1f7a5c;
+        }
+
+        .pdf-icon.locked {
+            background: #f0f3f2;
+            color: #778580;
+        }
+
+        .pdf-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+
+        /* =====================================================
+           PDF BUTTON
+        ====================================================== */
+
+        .pdf-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 13px;
+
+            border-radius: 11px;
+
+            background: #1f7a5c;
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .pdf-btn:hover {
+            background: #176549;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(31, 122, 92, 0.2);
+        }
+
+        .pdf-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+
+        /* =====================================================
+           PDF PROGRESS
+        ====================================================== */
+
+        .unlock-progress {
+            margin-top: 18px;
+        }
+
+        .unlock-progress-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 7px;
+
+            color: #71807d;
+
+            font-size: 10px;
+        }
+
+        .unlock-progress-top strong {
+            color: #203752;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 7px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: #e4ebe8;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+
+            border-radius: 20px;
+
+            background: #1f7a5c;
+
+            transition:
+                width 1s ease;
+        }
+
+        .unlock-progress small {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #84918e;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           SECONDARY BUTTON
+        ====================================================== */
+
+        .secondary-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            width: 100%;
+
+            margin-top: 17px;
+
+            padding: 11px;
+
+            border-radius: 10px;
+
+            background: #eef6f2;
+            color: #1f7a5c;
+
+            text-decoration: none;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .secondary-btn:hover {
+            background: #e1f0ea;
+
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ====================================================== */
+
+        .empty-state {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            min-height: 45px;
+
+            padding: 14px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            background: #f7faf9;
+
+            color: #7b8986;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        .empty-state svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .success-empty {
+            color: #1f7a5c;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .result-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 30px 5px 0;
+
+            color: #899490;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 1250px) {
+
+            .result-page {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .result-grid {
+                grid-template-columns:
+                    220px
+                    minmax(450px, 1fr);
+            }
+
+            .result-right {
+                grid-column: 1 / -1;
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 22px;
+            }
+
+            .result-right .result-card {
+                margin-bottom: 0;
+            }
+
+            .jobs-card {
+                position: static;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL TABLET
+        ====================================================== */
+
+        @media (max-width: 950px) {
+
+            .result-hero {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .analysis-status {
+                min-width: 0;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-sidebar {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 20px;
+            }
+
+            .result-sidebar .result-card {
+                margin-bottom: 0;
+            }
+
+            .result-right {
+                grid-column: auto;
+                display: block;
+            }
+
+            .result-right .result-card {
+                margin-bottom: 22px;
+            }
+
+            .jobs-card {
+                position: static;
+            }
+
+            .score-display {
+                gap: 30px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .result-page {
+                padding:
+                    22px
+                    15px
+                    45px;
+            }
+
+            .result-header {
+                margin-bottom: 40px;
+            }
+
+
+            /* Mobile logo */
+
+            .hiresense-logo {
+                width: 45px;
+                height: 45px;
+
+                flex-basis: 45px;
+
+                border-radius: 12px;
+            }
+
+
+            .brand {
+                gap: 9px;
+            }
+
+            .brand-text strong {
+                font-size: 20px;
+            }
+
+            .brand-text span {
+                font-size: 9px;
+            }
+
+
+            .new-analysis-btn {
+                padding: 10px 12px;
+                font-size: 10px;
+            }
+
+
+            .result-hero {
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+
+            .result-hero h1 {
+                font-size: 40px;
+                letter-spacing: -1px;
+            }
+
+            .result-hero p {
+                font-size: 12px;
+            }
+
+
+            .result-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .result-sidebar {
+                display: block;
+            }
+
+            .result-sidebar .result-card {
+                margin-bottom: 18px;
+            }
+
+
+            .result-card {
+                padding: 20px;
+                margin-bottom: 18px;
+                border-radius: 18px;
+            }
+
+            .score-card {
+                padding: 22px;
+            }
+
+
+            .score-card-header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .score-display {
+                flex-direction: column;
+                align-items: center;
+
+                gap: 25px;
+
+                text-align: center;
+            }
+
+            .big-score-ring {
+                width: 185px;
+                height: 185px;
+                flex-basis: 185px;
+            }
+
+            .score-number strong {
+                font-size: 39px;
+            }
+
+            .score-explanation {
+                width: 100%;
+                max-width: none;
+            }
+
+            .score-message {
+                justify-content: center;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+            }
+
+            .job-buttons {
+                flex-direction: row;
+            }
+
+            .result-footer {
+                flex-direction: column;
+                align-items: flex-start;
+
+                gap: 8px;
+            }
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 430px) {
+
+            .result-page {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .result-header {
+                align-items: flex-start;
+            }
+
+            .brand-text span {
+                display: none;
+            }
+
+            .brand-text strong {
+                font-size: 18px;
+            }
+
+
+            .hiresense-logo {
+                width: 40px;
+                height: 40px;
+
+                flex-basis: 40px;
+
+                border-radius: 11px;
+            }
+
+
+            .new-analysis-btn {
+                padding: 9px 10px;
+                font-size: 9px;
+            }
+
+            .result-hero h1 {
+                font-size: 34px;
+            }
+
+            .result-card {
+                padding: 18px;
+            }
+
+            .big-score-ring {
+                width: 165px;
+                height: 165px;
+
+                flex-basis: 165px;
+            }
+
+            .score-number strong {
+                font-size: 35px;
+            }
+
+            .job-buttons a {
+                padding: 8px 9px;
+                font-size: 9px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+{% set current_score = score | default(0) %}
+{% set score_category = score_category | default(category) %}
+
+
+<div class="result-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="result-header">
+
+        <!-- NEW SAMPLE-STYLE HIRESENSE LOGO -->
+
+        <div class="brand">
+
+            <div class="hiresense-logo">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="HireSense logo"
+                    role="img">
+
+                    <!-- Main sparkle -->
+
+                    <path
+                        d="
+                        M31 13
+                        C32 13 33 14 33.4 16
+                        L35.8 28.2
+                        L48 30.6
+                        C50 31 51 32 51 33.5
+                        C51 35 50 36 48 36.4
+                        L35.8 38.8
+                        L33.4 51
+                        C33 53 32 54 31 54
+                        C29.5 54 28.5 53 28.1 51
+                        L25.7 38.8
+                        L13.5 36.4
+                        C11.5 36 10.5 35 10.5 33.5
+                        C10.5 32 11.5 31 13.5 30.6
+                        L25.7 28.2
+                        L28.1 16
+                        C28.5 14 29.5 13 31 13Z"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linejoin="round"
+                    />
+
+
+                    <!-- Small circle -->
+
+                    <circle
+                        cx="16"
+                        cy="47"
+                        r="4"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                    />
+
+
+                    <!-- Small plus -->
+
+                    <path
+                        d="M51 12V22M46 17H56"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <div class="brand-text">
+
+                <strong>
+                    HireSense
+                </strong>
+
+                <span>
+                    AI Career Intelligence
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NEW ANALYSIS -->
+
+        <a
+            href="{{ url_for('analyzer') }}"
+            class="new-analysis-btn">
+
+            <i data-lucide="plus"></i>
+
+            New Analysis
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="result-hero">
+
+        <div class="result-hero-text">
+
+            <span class="eyebrow">
+                AI ANALYSIS COMPLETE
+            </span>
+
+
+            <h1>
+                Your career
+                <br>
+                analysis is ready.
+            </h1>
+
+
+            <p>
+                HireSense analyzed your resume and compared
+                your skills with the job requirements.
+                Review your match score, strengths,
+                missing skills and recommendations below.
+            </p>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="analysis-status">
+
+            <div class="status-icon">
+
+                <i data-lucide="check"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Analysis completed
+                </strong>
+
+                <span>
+                    AI-powered resume evaluation
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN GRID
+    ====================================================== -->
+
+    <div class="result-grid">
+
+
+        <!-- =================================================
+             LEFT SIDEBAR
+        ================================================== -->
+
+        <aside class="result-sidebar">
+
+
+            <!-- PROFILE -->
+
+            <section class="result-card profile-card">
+
+                <div class="profile-icon">
+                    <i data-lucide="user-round"></i>
+                </div>
+
+                <h3>
+                    Candidate Profile
+                </h3>
+
+                <p>
+                    Your resume was successfully
+                    processed by HireSense.
+                </p>
+
+
+                <div class="profile-line">
+
+                    <span>
+                        Resume
+                    </span>
+
+                    <strong>
+                        Uploaded
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-line">
+
+                    <span>
+                        AI Analysis
+                    </span>
+
+                    <strong>
+                        Complete
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-line">
+
+                    <span>
+                        Job Matching
+                    </span>
+
+                    <strong>
+                        Complete
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- AI INSIGHT -->
+
+            <section class="result-card">
+
+                <div class="card-icon">
+                    <i data-lucide="sparkles"></i>
+                </div>
+
+                <h3>
+                    AI Career Insight
+                </h3>
+
+                <p>
+                    HireSense analyzes your professional
+                    background and identifies skills
+                    relevant to your target role.
+                </p>
+
+            </section>
+
+
+
+            <!-- CAREER TIP -->
+
+            <section class="result-card">
+
+                <div class="card-icon">
+                    <i data-lucide="lightbulb"></i>
+                </div>
+
+                <h3>
+                    Career Tip
+                </h3>
+
+                <p>
+                    Focus on the missing skills before
+                    applying to highly competitive roles.
+                </p>
+
+            </section>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             CENTER CONTENT
+        ================================================== -->
+
+        <main class="result-main">
+
+
+            <!-- =================================================
+                 SCORE CARD
+            ================================================== -->
+
+            <section class="result-card score-card">
+
+                <div class="score-card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            RESUME MATCH SCORE
+                        </span>
+
+                        <h2>
+                            How well you match this role
+                        </h2>
+
+                    </div>
+
+
+                    {% if score_category %}
+
+                    <div class="score-status">
+                        {{ score_category.label }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="score-display">
+
+
+                    <!-- SCORE CIRCLE -->
+
+                    <div class="big-score-ring">
+
+                        <svg
+                            viewBox="0 0 200 200"
+                            aria-label="Resume match score">
+
+                            <circle
+                                class="score-track"
+                                cx="100"
+                                cy="100"
+                                r="82">
+                            </circle>
+
+
+                            <circle
+                                class="score-progress"
+                                id="scoreCircle"
+                                cx="100"
+                                cy="100"
+                                r="82"
+                                data-score="{{ current_score }}">
+                            </circle>
+
+                        </svg>
+
+
+                        <div class="score-number">
+
+                            <strong>
+                                {{ current_score }}%
+                            </strong>
+
+                            <span>
+                                Match
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SCORE EXPLANATION -->
+
+                    <div class="score-explanation">
+
+                        {% if score_category %}
+
+                        <h3>
+                            {{ score_category.label }}
+                        </h3>
+
+                        <p>
+                            {{ score_category.message }}
+                        </p>
+
+                        {% endif %}
+
+
+                        {% if current_score < 50 %}
+
+                        <div class="score-message warning">
+
+                            <i data-lucide="alert-triangle"></i>
+
+                            Major improvement is required.
+
+                        </div>
+
+
+                        {% elif current_score < 60 %}
+
+                        <div class="score-message">
+
+                            <i data-lucide="trending-up"></i>
+
+                            Several important improvements
+                            are recommended.
+
+                        </div>
+
+
+                        {% elif current_score < 75 %}
+
+                        <div class="score-message">
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                            Your match can reasonably
+                            be improved.
+
+                        </div>
+
+
+                        {% elif current_score < 85 %}
+
+                        <div class="score-message">
+
+                            <i data-lucide="target"></i>
+
+                            Your resume is becoming
+                            a stronger match.
+
+                        </div>
+
+
+                        {% else %}
+
+                        <div class="score-message success">
+
+                            <i data-lucide="badge-check"></i>
+
+                            Your resume is ready
+                            for this opportunity.
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MATCHED SKILLS
+            ================================================== -->
+
+            <section class="result-card">
+
+                <div class="section-heading">
+
+                    <div class="card-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            STRENGTHS
+                        </span>
+
+                        <h2>
+                            Matched Skills
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if matched_skills %}
+
+                <div class="skill-list">
+
+                    {% for skill in matched_skills %}
+
+                    <span class="skill-pill matched">
+
+                        <i data-lucide="check"></i>
+
+                        {{ skill }}
+
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                {% else %}
+
+                <div class="empty-state">
+
+                    <i data-lucide="info"></i>
+
+                    No matching skills were detected.
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MISSING SKILLS
+            ================================================== -->
+
+            <section class="result-card">
+
+                <div class="section-heading">
+
+                    <div class="card-icon">
+                        <i data-lucide="triangle-alert"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            IMPROVEMENT AREAS
+                        </span>
+
+                        <h2>
+                            Missing Skills
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if missing_skills %}
+
+                <div class="skill-list">
+
+                    {% for skill in missing_skills %}
+
+                    <span class="skill-pill missing">
+
+                        <i data-lucide="plus"></i>
+
+                        {{ skill }}
+
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                {% else %}
+
+                <div class="empty-state success-empty">
+
+                    <i data-lucide="check-circle"></i>
+
+                    No major missing skills detected.
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 REQUIRED SKILLS
+            ================================================== -->
+
+            <section class="result-card">
+
+                <div class="section-heading">
+
+                    <div class="card-icon">
+                        <i data-lucide="list-checks"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            JOB REQUIREMENTS
+                        </span>
+
+                        <h2>
+                            Required Skills
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if required_skills %}
+
+                <div class="skill-list">
+
+                    {% for skill in required_skills %}
+
+                    <span class="skill-pill required">
+                        {{ skill }}
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                {% else %}
+
+                <div class="empty-state">
+
+                    No specific skills were detected
+                    from the job description.
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 AI GAP ANALYSIS
+            ================================================== -->
+
+            <section class="result-card">
+
+                <div class="section-heading">
+
+                    <div class="card-icon">
+                        <i data-lucide="brain"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            AI RECOMMENDATION
+                        </span>
+
+                        <h2>
+                            Skill Gap Analysis
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if gaps %}
+
+                    {% if gaps is string %}
+
+                    <div class="ai-content">
+
+                        <p>
+                            {{ gaps }}
+                        </p>
+
+                    </div>
+
+
+                    {% else %}
+
+                    <div class="ai-content">
+
+                        {% for gap in gaps %}
+
+                        <div class="recommendation-item">
+
+                            <div class="recommendation-icon">
+
+                                <i data-lucide="arrow-right"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    {{ gap }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% endif %}
+
+
+                {% else %}
+
+                <div class="empty-state">
+
+                    No additional skill gaps were detected.
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 LEARNING RESOURCES
+            ================================================== -->
+
+            <section class="result-card">
+
+                <div class="section-heading">
+
+                    <div class="card-icon">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            LEARNING PATH
+                        </span>
+
+                        <h2>
+                            Recommended Resources
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if resources %}
+
+                <div class="resource-list">
+
+                    {% for resource in resources %}
+
+                    <div class="resource-item">
+
+                        <div class="resource-number">
+                            {{ loop.index }}
+                        </div>
+
+
+                        <div class="resource-content">
+
+                            {% if resource is string %}
+
+                            <strong>
+                                {{ resource }}
+                            </strong>
+
+
+                            {% else %}
+
+                            <strong>
+                                {{ resource.title |
+                                default("Recommended Resource") }}
+                            </strong>
+
+
+                            {% if resource.description %}
+
+                            <p>
+                                {{ resource.description }}
+                            </p>
+
+                            {% endif %}
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                {% else %}
+
+                <div class="empty-state">
+
+                    No additional learning resources
+                    were generated.
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+        </main>
+
+
+
+        <!-- =================================================
+             RIGHT SIDEBAR
+        ================================================== -->
+
+        <aside class="result-right">
+
+
+            <!-- =================================================
+                 JOB OPPORTUNITIES
+            ================================================== -->
+
+            <section class="result-card jobs-card">
+
+                <div class="card-icon">
+                    <i data-lucide="briefcase"></i>
+                </div>
+
+
+                <span class="section-label">
+                    CAREER OPPORTUNITIES
+                </span>
+
+
+                <h2>
+                    Suitable Jobs
+                </h2>
+
+
+                <p>
+                    Explore job searches based on
+                    the skills detected from your resume.
+                </p>
+
+
+                {% if job_links %}
+
+                <div class="job-list">
+
+                    {% for job in job_links %}
+
+                    <div class="job-item">
+
+                        <strong>
+                            {{ job.title |
+                            default("Suitable Job") }}
+                        </strong>
+
+
+                        <span>
+                            Based on
+                            {{ job.skill |
+                            default("your skills") }}
+                        </span>
+
+
+                        <div class="job-buttons">
+
+
+                            {% if job.linkedin %}
+
+                            <a
+                                href="{{ job.linkedin }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="linkedin-btn">
+
+                                <img
+                                    src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg"
+                                    alt="LinkedIn"
+                                    class="company-logo">
+
+                                LinkedIn
+
+                            </a>
+
+                            {% endif %}
+
+
+
+                            {% if job.indeed %}
+
+                            <a
+                                href="{{ job.indeed }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="indeed-btn">
+
+                                <img
+                                    src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/indeed.svg"
+                                    alt="Indeed"
+                                    class="company-logo">
+
+                                Indeed
+
+                            </a>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                {% else %}
+
+                <div class="empty-state">
+
+                    No job suggestions available.
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PDF CARD
+            ================================================== -->
+
+            <section class="result-card pdf-card">
+
+
+                {% if current_score >= 85 %}
+
+
+                <!-- PDF UNLOCKED -->
+
+                <div class="pdf-icon success">
+
+                    <i data-lucide="file-check-2"></i>
+
+                </div>
+
+
+                <span class="section-label">
+                    RESUME UNLOCKED
+                </span>
+
+
+                <h2>
+                    Your resume is ready.
+                </h2>
+
+
+                <p>
+                    Your match score has reached
+                    the 85% requirement.
+                    Your resume PDF is unlocked.
+                </p>
+
+
+                {% if pdf_filename %}
+
+                <a
+                    href="{{ url_for('download_pdf', filename=pdf_filename) }}"
+                    class="pdf-btn">
+
+                    <i data-lucide="download"></i>
+
+                    Download Resume PDF
+
+                </a>
+
+
+                {% else %}
+
+                <div class="empty-state">
+
+                    Resume PDF is not available yet.
+
+                </div>
+
+                {% endif %}
+
+
+                {% else %}
+
+
+                <!-- PDF LOCKED -->
+
+                <div class="pdf-icon locked">
+
+                    <i data-lucide="lock"></i>
+
+                </div>
+
+
+                <span class="section-label">
+                    RESUME PDF
+                </span>
+
+
+                <h2>
+                    PDF not unlocked yet.
+                </h2>
+
+
+                <p>
+                    Reach a match score of at least
+                    <strong>85%</strong> to unlock
+                    your optimized resume PDF.
+                </p>
+
+
+                <div class="unlock-progress">
+
+
+                    <div class="unlock-progress-top">
+
+                        <span>
+                            Current score
+                        </span>
+
+                        <strong>
+                            {{ current_score }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-track">
+
+                        <div
+                            class="progress-fill"
+                            id="scoreProgress"
+                            data-score="{{ current_score }}">
+                        </div>
+
+                    </div>
+
+
+                    <small>
+
+                        {% if current_score < 85 %}
+
+                            {{ 85 - current_score }}%
+                            more needed
+
+                        {% else %}
+
+                            PDF unlocked
+
+                        {% endif %}
+
+                    </small>
+
+                </div>
+
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NEW ANALYSIS
+            ================================================== -->
+
+            <section class="result-card next-card">
+
+                <div class="card-icon">
+
+                    <i data-lucide="refresh-cw"></i>
+
+                </div>
+
+
+                <h3>
+                    Analyze another resume
+                </h3>
+
+
+                <p>
+                    Try HireSense with another resume,
+                    profession or job description.
+                </p>
+
+
+                <a
+                    href="{{ url_for('analyzer') }}"
+                    class="secondary-btn">
+
+                    Start New Analysis
+
+                    <i data-lucide="arrow-right"></i>
+
+                </a>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="result-footer">
+
+        <span>
+            HireSense
+        </span>
+
+        <span>
+            AI-powered career intelligence
+        </span>
+
+    </footer>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =================================================
+           LUCIDE ICONS
+        ================================================== */
+
+        if (typeof lucide !== "undefined") {
+
+            lucide.createIcons();
+
+        }
+
+
+        /* =================================================
+           SCORE PROGRESS BAR
+        ================================================== */
+
+        const progress =
+            document.getElementById(
+                "scoreProgress"
+            );
+
+
+        if (progress) {
+
+            let score =
+                Number(
+                    progress.dataset.score
+                );
+
+
+            if (Number.isNaN(score)) {
+
+                score = 0;
+
+            }
+
+
+            score =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        score
+                    )
+                );
+
+
+            setTimeout(
+                function () {
+
+                    progress.style.width =
+                        score + "%";
+
+                },
+                200
+            );
+
+        }
+
+
+        /* =================================================
+           SCORE CIRCLE
+        ================================================== */
+
+        const scoreCircle =
+            document.getElementById(
+                "scoreCircle"
+            );
+
+
+        if (scoreCircle) {
+
+            let score =
+                Number(
+                    scoreCircle.dataset.score
+                );
+
+
+            if (Number.isNaN(score)) {
+
+                score = 0;
+
+            }
+
+
+            score =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        score
+                    )
+                );
+
+
+            const radius = 82;
+
+
+            const circumference =
+                2 *
+                Math.PI *
+                radius;
+
+
+            const offset =
+                circumference -
+                (
+                    circumference *
+                    score /
+                    100
+                );
+
+
+            scoreCircle.style.strokeDasharray =
+                circumference;
+
+
+            scoreCircle.style.strokeDashoffset =
+                circumference;
+
+
+            setTimeout(
+                function () {
+
+                    scoreCircle.style.strokeDashoffset =
+                        offset;
+
+                },
+                200
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='v3-favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='v3-favicon-32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='v3-favicon-180.png') }}">
+</head>
+<body>
+<div class="container">
+    <a class="back" href="{{ url_for('home') }}">&larr; Back to analyzer</a>
+    <div class="card">
+        <p class="eyebrow" style="color: var(--accent); font-weight:600; font-size:13px; margin-bottom:8px;">Coming soon</p>
+        <h2>Your history and recommendations, in one place</h2>
+        <p class="muted" style="margin-top:10px;">
+            Supabase-powered history and job recommendations will be added in the next phase.
+        </p>
+    </div>
+</div>
+</body>
+</html>

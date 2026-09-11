@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="HireSense AI Resume and Job Matching Agent">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='v3-favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='v3-favicon-32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='v3-favicon-180.png') }}">      
+     <title>HireSense | AI Resume Analyzer</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         LUCIDE ICONS
+    ====================================================== -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+    <!-- =====================================================
+         HIRESENSE CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+    <header class="hs-header">
+
+    <a href="/" class="hs-brand">
+
+        <span class="hs-logo-box">
+            <i data-lucide="sparkles"></i>
+        </span>
+
+        <span class="hs-logo-text">
+            HireSense
+        </span>
+
+    </a>
+
+</header>
+
+
+<!-- =========================================================
+     DECORATIVE BACKGROUND DOTS
+========================================================= -->
+
+<div class="floating-dot one"></div>
+
+<div class="floating-dot two"></div>
+
+<div class="floating-dot three"></div>
+
+
+
+<!-- =========================================================
+     MAIN ANALYZER LAYOUT
+========================================================= -->
+
+<div class="analyzer-layout">
+
+
+    <!-- =====================================================
+         LEFT PANEL
+    ====================================================== -->
+
+    <aside class="left-panel">
+
+
+        <!-- INTRODUCTION -->
+
+        <div>
+
+            <h2>HireSense</h2>
+
+            <p>
+                Your AI-powered career companion that
+                understands your resume and connects
+                your skills with the right opportunities.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEATURE 1
+        ================================================== -->
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+
+                <i data-lucide="scan-search"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Smart Analysis
+                </h3>
+
+                <p>
+                    Understand your skills, experience,
+                    education and professional domain.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEATURE 2
+        ================================================== -->
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+
+                <i data-lucide="target"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Job Matching
+                </h3>
+
+                <p>
+                    Compare your resume with job
+                    requirements and calculate a match score.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEATURE 3
+        ================================================== -->
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+
+                <i data-lucide="graduation-cap"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Skill Growth
+                </h3>
+
+                <p>
+                    Discover missing skills and learn
+                    what you need to become job-ready.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEATURE 4
+        ================================================== -->
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+
+                <i data-lucide="briefcase-business"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Career Opportunities
+                </h3>
+
+                <p>
+                    Find suitable job roles based on
+                    your resume and skills.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             WHAT YOU'LL GET CARD
+        ================================================== -->
+
+        <div class="left-insight-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="left-insight-header">
+
+                <div class="left-insight-icon">
+
+                    <i data-lucide="sparkles"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        YOUR AI REPORT
+                    </span>
+
+                    <h3>
+                        What you'll get
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REPORT ITEM 1
+            ================================================== -->
+
+            <div class="insight-item">
+
+                <div class="insight-number">
+                    01
+                </div>
+
+                <div>
+
+                    <strong>
+                        Resume Understanding
+                    </strong>
+
+                    <p>
+                        AI identifies your profession,
+                        experience, education and skills.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REPORT ITEM 2
+            ================================================== -->
+
+            <div class="insight-item">
+
+                <div class="insight-number">
+                    02
+                </div>
+
+                <div>
+
+                    <strong>
+                        Job Match Score
+                    </strong>
+
+                    <p>
+                        See how closely your resume
+                        matches the selected opportunity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REPORT ITEM 3
+            ================================================== -->
+
+            <div class="insight-item">
+
+                <div class="insight-number">
+                    03
+                </div>
+
+                <div>
+
+                    <strong>
+                        Skill Gap Detection
+                    </strong>
+
+                    <p>
+                        Discover the skills you need
+                        to strengthen your profile.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REPORT ITEM 4
+            ================================================== -->
+
+            <div class="insight-item">
+
+                <div class="insight-number">
+                    04
+                </div>
+
+                <div>
+
+                    <strong>
+                        Career Recommendations
+                    </strong>
+
+                    <p>
+                        Get suitable roles and learning
+                        resources based on your profile.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUOTE
+        ================================================== -->
+
+        <div class="career-quote">
+
+            <strong>
+
+                "Your resume tells your story.
+                HireSense helps you tell it better."
+
+            </strong>
+
+            <span>
+
+                AI-powered career intelligence
+
+            </span>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CENTER PANEL
+    ====================================================== -->
+
+    <main class="center-panel">
+
+
+        <div class="analyzer-card">
+
+
+            <!-- =================================================
+                 ANALYZER HEADER
+            ================================================== -->
+
+            <div class="analyzer-header">
+
+                <span class="eyebrow">
+
+                    AI CAREER INTELLIGENCE
+
+                </span>
+
+
+                <h1>
+
+                    Analyze your career.
+                    <br>
+                    Find your next opportunity.
+
+                </h1>
+
+
+                <p>
+
+                    Upload your resume and provide a job description.
+                    HireSense analyzes your profile, identifies skill
+                    gaps and calculates how well you match the role.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <form action="/analyze"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+
+
+                <!-- =================================================
+                     STEP 1 - RESUME
+                ================================================== -->
+
+                <div class="step">
+
+
+                    <div class="step-number">
+                        1
+                    </div>
+
+
+                    <div class="step-content">
+
+
+                        <h2>
+                            Upload your resume
+                        </h2>
+
+
+                        <p>
+                            Upload your latest resume in PDF or DOCX format.
+                        </p>
+
+
+
+                        <!-- UPLOAD AREA -->
+
+                        <label class="upload-area"
+                               for="resume">
+
+
+                            <i data-lucide="cloud-upload"></i>
+
+
+                            <strong>
+                                Drop your resume here
+                            </strong>
+
+
+                            <span>
+                                or click to browse • PDF / DOCX
+                            </span>
+
+
+                            <input
+                                type="file"
+                                id="resume"
+                                name="resume"
+                                accept=".pdf,.docx"
+                                required
+                            >
+
+
+                        </label>
+
+
+
+                        <!-- SELECTED FILE NAME -->
+
+                        <div id="file-name"
+                             style="
+                                margin-top:12px;
+                                text-align:center;
+                                font-size:13px;
+                                color:#1f7a5c;
+                                font-weight:600;
+                             ">
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STEP 2 - JOB DESCRIPTION
+                ================================================== -->
+
+                <div class="step">
+
+
+                    <div class="step-number">
+                        2
+                    </div>
+
+
+                    <div class="step-content">
+
+
+                        <h2>
+                            Add the job description
+                        </h2>
+
+
+                        <p>
+                            Paste the job description of the role
+                            you want to apply for.
+                        </p>
+
+
+                        <textarea
+                            name="job_description"
+                            id="job_description"
+                            placeholder="Paste the job description here...
+
+Example:
+
+We are looking for a Machine Learning Engineer with experience in Python, SQL, Machine Learning, TensorFlow and data analysis..."
+                        ></textarea>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STEP 3 - LINKEDIN URL
+                ================================================== -->
+
+                <div class="step">
+
+
+                    <div class="step-number">
+                        3
+                    </div>
+
+
+                    <div class="step-content">
+
+
+                        <h2>
+                            LinkedIn job URL
+                        </h2>
+
+
+                        <p>
+                            Optional: provide the LinkedIn job
+                            URL for reference.
+                        </p>
+
+
+                        <input
+                            type="url"
+                            name="linkedin_url"
+                            id="linkedin_url"
+                            placeholder="https://www.linkedin.com/jobs/view/..."
+                            style="
+                                width:100%;
+                                box-sizing:border-box;
+                                padding:16px 18px;
+                                border:1px solid #d6e1dc;
+                                border-radius:16px;
+                                background:#fbfdfc;
+                                color:#203752;
+                                font-family:inherit;
+                                font-size:14px;
+                                outline:none;
+                            "
+                        >
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STEP 4 - ANALYZE
+                ================================================== -->
+
+                <div class="step">
+
+
+                    <div class="step-number">
+                        4
+                    </div>
+
+
+                    <div class="step-content">
+
+
+                        <h2>
+                            Start AI analysis
+                        </h2>
+
+
+                        <p>
+
+                            HireSense will analyze your resume,
+                            compare it with the job and generate
+                            personalized career recommendations.
+
+                        </p>
+
+
+                        <button
+                            type="submit"
+                            class="analyze-btn">
+
+
+                            <i data-lucide="sparkles"></i>
+
+
+                            Analyze My Resume
+
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RIGHT PANEL
+    ====================================================== -->
+
+    <aside class="right-panel">
+
+
+        <!-- =================================================
+             AI CAREER ASSISTANT
+        ================================================== -->
+
+        <div class="ai-card">
+
+
+            <div class="ai-icon">
+
+                <i data-lucide="bot"></i>
+
+            </div>
+
+
+            <h3>
+                AI Career Assistant
+            </h3>
+
+
+            <p>
+
+                HireSense uses AI to understand different
+                professional backgrounds and identify the
+                career opportunities that fit your profile.
+
+            </p>
+
+
+
+            <!-- AI FEATURE 1 -->
+
+            <div class="ai-feature">
+
+                <div class="ai-feature-icon">
+
+                    <i data-lucide="check"></i>
+
+                </div>
+
+                <span>
+                    Understand any profession
+                </span>
+
+            </div>
+
+
+
+            <!-- AI FEATURE 2 -->
+
+            <div class="ai-feature">
+
+                <div class="ai-feature-icon">
+
+                    <i data-lucide="check"></i>
+
+                </div>
+
+                <span>
+                    Detect relevant skills
+                </span>
+
+            </div>
+
+
+
+            <!-- AI FEATURE 3 -->
+
+            <div class="ai-feature">
+
+                <div class="ai-feature-icon">
+
+                    <i data-lucide="check"></i>
+
+                </div>
+
+                <span>
+                    Identify suitable roles
+                </span>
+
+            </div>
+
+
+
+            <!-- AI FEATURE 4 -->
+
+            <div class="ai-feature">
+
+                <div class="ai-feature-icon">
+
+                    <i data-lucide="check"></i>
+
+                </div>
+
+                <span>
+                    Recommend skills to learn
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             SCORE PREVIEW
+        ================================================== -->
+
+        <div class="score-preview">
+
+
+            <div class="score-preview-label">
+                Example match
+            </div>
+
+
+            <div class="score-ring">
+
+                <strong>
+                    85%
+                </strong>
+
+            </div>
+
+
+            <p>
+
+                Your resume match score will appear
+                here after AI analysis.
+
+            </p>
+
+
+            <!-- SKILL BADGES -->
+
+            <div class="skill-badges">
+
+
+                <span class="skill-badge">
+                    Python
+                </span>
+
+
+                <span class="skill-badge">
+                    SQL
+                </span>
+
+
+                <span class="skill-badge">
+                    AI / ML
+                </span>
+
+
+                <span class="skill-badge">
+                    Skills
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             CAREER TIP
+        ================================================== -->
+
+        <div class="ai-card"
+             style="margin-top:22px;">
+
+
+            <div class="ai-icon">
+
+                <i data-lucide="lightbulb"></i>
+
+            </div>
+
+
+            <h3>
+                Career Tip
+            </h3>
+
+
+            <p>
+
+                A strong resume should clearly show your
+                skills, projects, experience and measurable
+                achievements.
+
+            </p>
+
+
+        </div>
+
+
+    </aside>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     FILE NAME SCRIPT
+========================================================= -->
+
+<script>
+
+    const resumeInput =
+        document.getElementById("resume");
+
+    const fileName =
+        document.getElementById("file-name");
+
+
+    resumeInput.addEventListener(
+        "change",
+        function () {
+
+            if (this.files.length > 0) {
+
+                fileName.textContent =
+                    "✓ Selected: " +
+                    this.files[0].name;
+
+            } else {
+
+                fileName.textContent = "";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+
+<!-- =========================================================
+     LUCIDE INITIALIZATION
+========================================================= -->
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+</body>
+
+</html>

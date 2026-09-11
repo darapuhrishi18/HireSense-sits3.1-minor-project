@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HireSense AI-Based Resume Intelligence & Recruitment Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='v3-favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='v3-favicon-32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='v3-favicon-180.png') }}">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="welcome-navbar">
+
+    <div class="welcome-logo">
+        <span class="logo-icon">
+            <i data-lucide="sparkles"></i>
+        </span>
+        HireSense
+    </div>
+
+    <div class="welcome-nav-links">
+        <a href="#features">
+            <i data-lucide="layers"></i>
+            Features
+        </a>
+
+        <a href="#how-it-works">
+            <i data-lucide="route"></i>
+            How It Works
+        </a>
+    </div>
+
+</nav>
+
+
+<!-- HERO SECTION -->
+<section class="welcome-hero">
+
+    <div class="welcome-hero-content">
+
+        <div class="welcome-badge">
+            <i data-lucide="sparkles"></i>
+            AI-Based Resume Intelligence & Recruitment Assistant
+        </div>
+
+        <h1>
+            Build a Resume
+            <span>That Gets Noticed.</span>
+        </h1>
+
+        <p>
+            Analyze your resume against a job description,
+            discover skill gaps, and get personalized
+            recommendations to improve your career opportunities.
+        </p>
+
+        <div class="welcome-buttons">
+
+            <a href="{{ url_for('analyzer') }}"
+               class="welcome-primary-btn">
+
+                <i data-lucide="file-search"></i>
+                Analyze My Resume
+
+                <i data-lucide="arrow-right"></i>
+            </a>
+
+            <a href="#features"
+               class="welcome-secondary-btn">
+
+                <i data-lucide="layout-grid"></i>
+                Explore Features
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- HERO VISUAL -->
+    <div class="welcome-visual">
+
+        <div class="resume-preview">
+
+            <div class="preview-header">
+
+                <div class="preview-profile">
+
+                    <div class="profile-circle">
+                        R
+                    </div>
+
+                    <div>
+                        <strong>Resume Analysis</strong>
+                        <small>AI-powered evaluation</small>
+                    </div>
+
+                </div>
+
+                <div class="preview-check">
+                    <i data-lucide="check"></i>
+                </div>
+
+            </div>
+
+
+            <div class="preview-score">
+
+                <div class="score-circle">
+                    <span>85%</span>
+                    <small>Match</small>
+                </div>
+
+                <div class="score-info">
+
+                    <strong>Great Match</strong>
+
+                    <p>
+                        Your resume matches
+                        most job requirements.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="preview-skills">
+
+                <span>
+                    Python
+                    <i data-lucide="check"></i>
+                </span>
+
+                <span>
+                    Machine Learning
+                    <i data-lucide="check"></i>
+                </span>
+
+                <span>
+                    SQL
+                    <i data-lucide="check"></i>
+                </span>
+
+                <span>
+                    Deep Learning
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="welcome-section"
+         id="features">
+
+    <div class="section-heading">
+
+        <span>POWERFUL FEATURES</span>
+
+        <h2>
+            Everything you need
+            to improve your resume.
+        </h2>
+
+        <p>
+            ResumeAI analyzes your resume and provides
+            useful insights based on your target job.
+        </p>
+
+    </div>
+
+
+    <div class="welcome-features">
+
+
+        <!-- FEATURE 1 -->
+        <div class="welcome-feature-card">
+
+            <div class="feature-icon">
+                <i data-lucide="file-text"></i>
+            </div>
+
+            <h3>
+                Resume Analysis
+            </h3>
+
+            <p>
+                Upload your PDF or DOCX resume
+                and let the AI analyze your skills
+                and experience.
+            </p>
+
+        </div>
+
+
+        <!-- FEATURE 2 -->
+        <div class="welcome-feature-card">
+
+            <div class="feature-icon">
+                <i data-lucide="target"></i>
+            </div>
+
+            <h3>
+                Match Score
+            </h3>
+
+            <p>
+                See how closely your resume matches
+                the requirements of your target job.
+            </p>
+
+        </div>
+
+
+        <!-- FEATURE 3 -->
+        <div class="welcome-feature-card">
+
+            <div class="feature-icon">
+                <i data-lucide="scan-search"></i>
+            </div>
+
+            <h3>
+                Skill Gap Detection
+            </h3>
+
+            <p>
+                Discover the important skills that
+                are missing from your resume.
+            </p>
+
+        </div>
+
+
+        <!-- FEATURE 4 -->
+        <div class="welcome-feature-card">
+
+            <div class="feature-icon">
+                <i data-lucide="book-open"></i>
+            </div>
+
+            <h3>
+                Learning Resources
+            </h3>
+
+            <p>
+                Get useful learning resources to
+                improve your missing skills.
+            </p>
+
+        </div>
+
+
+        <!-- FEATURE 5 -->
+        <div class="welcome-feature-card">
+
+            <div class="feature-icon">
+                <i data-lucide="briefcase-business"></i>
+            </div>
+
+            <h3>
+                Job Discovery
+            </h3>
+
+            <p>
+                Find job opportunities related to
+                the skills detected in your resume.
+            </p>
+
+        </div>
+
+
+        <!-- FEATURE 6 -->
+        <div class="welcome-feature-card">
+
+            <div class="feature-icon">
+                <i data-lucide="file-down"></i>
+            </div>
+
+            <h3>
+                Resume PDF
+            </h3>
+
+            <p>
+                Generate a professional PDF resume
+                when your requirements are satisfied.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="welcome-process"
+         id="how-it-works">
+
+    <div class="section-heading">
+
+        <span>SIMPLE PROCESS</span>
+
+        <h2>
+            How ResumeAI works
+        </h2>
+
+    </div>
+
+
+    <div class="process-steps">
+
+
+        <!-- STEP 1 -->
+        <div class="process-step">
+
+            <div class="process-number">
+                <i data-lucide="upload"></i>
+            </div>
+
+            <h3>
+                Upload Resume
+            </h3>
+
+            <p>
+                Upload your existing PDF or DOCX resume.
+            </p>
+
+        </div>
+
+
+        <div class="process-line"></div>
+
+
+        <!-- STEP 2 -->
+        <div class="process-step">
+
+            <div class="process-number">
+                <i data-lucide="clipboard-list"></i>
+            </div>
+
+            <h3>
+                Add Job Details
+            </h3>
+
+            <p>
+                Enter the job description you want
+                to target.
+            </p>
+
+        </div>
+
+
+        <div class="process-line"></div>
+
+
+        <!-- STEP 3 -->
+        <div class="process-step">
+
+            <div class="process-number">
+                <i data-lucide="sparkles"></i>
+            </div>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                Our AI compares your resume with
+                the job requirements.
+            </p>
+
+        </div>
+
+
+        <div class="process-line"></div>
+
+
+        <!-- STEP 4 -->
+        <div class="process-step">
+
+            <div class="process-number">
+                <i data-lucide="trending-up"></i>
+            </div>
+
+            <h3>
+                Improve
+            </h3>
+
+            <p>
+                Identify gaps and follow recommendations
+                to improve your profile.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="welcome-cta">
+
+    <div>
+
+        <span>
+            READY TO GET STARTED?
+        </span>
+
+        <h2>
+            Make your resume work harder for you.
+        </h2>
+
+        <p>
+            Discover your resume's strengths,
+            identify skill gaps, and move closer
+            to your dream job.
+        </p>
+
+    </div>
+
+
+    <a href="{{ url_for('analyzer') }}"
+       class="welcome-primary-btn">
+
+        <i data-lucide="rocket"></i>
+        Start Resume Analysis
+
+        <i data-lucide="arrow-right"></i>
+
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="welcome-footer">
+
+    <div class="welcome-logo">
+
+        <span class="logo-icon">
+            <i data-lucide="sparkles"></i>
+        </span>
+
+        HireSense
+
+    </div>
+
+    <p>
+        AI-Based Resume Intelligence & Recruitment Assistant.
+    </p>
+
+    <span>
+        © 2026 HireSense
+    </span>
+
+</footer>
+
+
+<!-- Activate Lucide Icons -->
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
