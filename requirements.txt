@@ -10,3 +10,4 @@ scikit-learn
 numpy
 Werkzeug
 xai-sdk
+groq
