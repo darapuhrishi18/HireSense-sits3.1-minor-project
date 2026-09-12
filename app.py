@@ -18,18 +18,39 @@ app = Flask(__name__)
 # FOLDERS
 # =========================================================
 
-UPLOAD_FOLDER = "uploads"
-GENERATED_FOLDER = "generated_resumes"
+# Vercel filesystem is read-only except for /tmp.
+# Locally, continue using normal project folders.
+
+if os.environ.get("VERCEL") == "1":
+    UPLOAD_FOLDER = "/tmp/uploads"
+    GENERATED_FOLDER = "/tmp/generated_resumes"
+else:
+    UPLOAD_FOLDER = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "uploads"
+    )
+
+    GENERATED_FOLDER = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "generated_resumes"
+    )
+
 
 ALLOWED_EXTENSIONS = {"pdf", "docx"}
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["GENERATED_FOLDER"] = GENERATED_FOLDER
 
+# Maximum upload size: 10 MB
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
-# Create folders automatically
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(GENERATED_FOLDER, exist_ok=True)
+
+# =========================================================
+# CREATE WRITABLE FOLDERS
+# =========================================================
+
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+os.makedirs(app.config["GENERATED_FOLDER"], exist_ok=True)
 
 
 # =========================================================
@@ -90,10 +111,10 @@ def analyze():
     # -----------------------------------------------------
 
     if not resume or resume.filename == "":
-        return "Please upload a PDF or DOCX resume."
+        return "Please upload a PDF or DOCX resume.", 400
 
     if not allowed_file(resume.filename):
-        return "Only PDF and DOCX resumes are supported."
+        return "Only PDF and DOCX resumes are supported.", 400
 
 
     # -----------------------------------------------------
@@ -101,7 +122,7 @@ def analyze():
     # -----------------------------------------------------
 
     if not job_description and not linkedin_url:
-        return "Please enter a job description or LinkedIn job URL."
+        return "Please enter a job description or LinkedIn job URL.", 400
 
 
     # -----------------------------------------------------
@@ -115,7 +136,11 @@ def analyze():
         filename
     )
 
-    resume.save(filepath)
+    try:
+        resume.save(filepath)
+
+    except Exception as exc:
+        return f"Could not save the uploaded resume: {exc}", 500
 
 
     # -----------------------------------------------------
@@ -128,7 +153,7 @@ def analyze():
 
     except Exception as exc:
 
-        return f"Could not read the resume: {exc}"
+        return f"Could not read the resume: {exc}", 500
 
 
     # =====================================================
@@ -168,10 +193,19 @@ def analyze():
     # CALCULATE RESUME MATCH SCORE
     # =====================================================
 
-    result = calculate_skill_score(
-        resume_text,
-        job_description
-    )
+    try:
+
+        result = calculate_skill_score(
+            resume_text,
+            job_description
+        )
+
+    except Exception as exc:
+
+        print("Scoring error:", exc)
+
+        return f"Resume scoring failed: {exc}", 500
+
 
     score = result["score"]
 
@@ -182,28 +216,56 @@ def analyze():
     # ANALYZE MISSING SKILLS
     # =====================================================
 
-    gap_result = analyze_gaps(
-        result["missing_skills"],
-        score
-    )
+    try:
+
+        gap_result = analyze_gaps(
+            result["missing_skills"],
+            score
+        )
+
+    except Exception as exc:
+
+        print("Gap analysis error:", exc)
+
+        gap_result = {
+            "drawbacks": [],
+            "recommendations": [],
+            "estimated_improvement": 0
+        }
 
 
     # =====================================================
     # GET LEARNING RESOURCES
     # =====================================================
 
-    resources = get_resources(
-        result["missing_skills"]
-    )
+    try:
+
+        resources = get_resources(
+            result["missing_skills"]
+        )
+
+    except Exception as exc:
+
+        print("Resource agent error:", exc)
+
+        resources = []
 
 
     # =====================================================
     # GENERATE JOB SEARCH LINKS
     # =====================================================
 
-    job_links = generate_job_links(
-        result["resume_skills"]
-    )
+    try:
+
+        job_links = generate_job_links(
+            result["resume_skills"]
+        )
+
+    except Exception as exc:
+
+        print("Job search error:", exc)
+
+        job_links = []
 
 
     # =====================================================
@@ -339,14 +401,15 @@ def download_pdf(filename):
     # Check whether PDF exists
     if not os.path.exists(pdf_path):
 
-        return "PDF not found."
+        return "PDF not found.", 404
 
 
     # Send PDF to browser
     return send_file(
         pdf_path,
         as_attachment=True,
-        download_name=filename
+        download_name=filename,
+        mimetype="application/pdf"
     )
 
 
@@ -364,9 +427,13 @@ def health():
 
 
 # =========================================================
-# RUN APPLICATION
+# RUN APPLICATION LOCALLY
 # =========================================================
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )
