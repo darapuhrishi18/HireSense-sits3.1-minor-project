@@ -2275,100 +2275,88 @@
                 {% endif %}
 
             </section>
+            <!-- ============================= -->
+<!-- RECOMMENDED LEARNING RESOURCES -->
+<!-- ============================= -->
 
+<section class="resources-section">
 
+    <div class="section-header">
+        <h2>📚 Recommended Learning Resources</h2>
+        <p>
+            Learn the skills you are missing for this specific job.
+        </p>
+    </div>
 
-            <!-- =================================================
-                 LEARNING RESOURCES
-            ================================================== -->
+    {% if resources %}
 
-            <section class="result-card">
+        <div class="resources-grid">
 
-                <div class="section-heading">
+            {% for resource in resources %}
 
-                    <div class="card-icon">
-                        <i data-lucide="graduation-cap"></i>
+                <div class="resource-card">
+
+                    <!-- Number -->
+                    <div class="resource-number">
+                        {{ loop.index }}
                     </div>
 
-                    <div>
+                    <!-- Skill -->
+                    <div class="resource-content">
 
-                        <span class="section-label">
-                            LEARNING PATH
-                        </span>
+                        <h3>
+                            {{ resource.title }}
+                        </h3>
 
-                        <h2>
-                            Recommended Resources
-                        </h2>
+                        <p>
+                            {{ resource.description }}
+                        </p>
+
+                        <!-- CLICKABLE LINK -->
+                        {% if resource.url %}
+
+                            <a
+                                href="{{ resource.url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="learning-link"
+                            >
+                                🔗 Open Learning Resource
+                                <span>↗</span>
+                            </a>
+
+                        {% endif %}
 
                     </div>
 
                 </div>
 
+            {% endfor %}
 
-                {% if resources %}
+        </div>
 
-                <div class="resource-list">
+    {% else %}
 
-                    {% for resource in resources %}
+        <div class="no-resources">
+            <p>
+                🎉 No additional learning resources are required.
+            </p>
+        </div>
 
-                    <div class="resource-item">
+    {% endif %}
 
-                        <div class="resource-number">
-                            {{ loop.index }}
-                        </div>
-
-
-                        <div class="resource-content">
-
-                            {% if resource is string %}
-
-                            <strong>
-                                {{ resource }}
-                            </strong>
+</section>
 
 
-                            {% else %}
 
-                            <strong>
-                                {{ resource.title |
-                                default("Recommended Resource") }}
-                            </strong>
+           
+
+                    
 
 
-                            {% if resource.description %}
 
-                            <p>
-                                {{ resource.description }}
-                            </p>
-
-                            {% endif %}
-
-                            {% endif %}
-
-                        </div>
-
-                    </div>
-
-                    {% endfor %}
-
-                </div>
-
-
-                {% else %}
-
-                <div class="empty-state">
-
-                    No additional learning resources
-                    were generated.
-
-                </div>
-
-                {% endif %}
-
-            </section>
-
-        </main>
-
+ 
+                            
 
 
         <!-- =================================================
